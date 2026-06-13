@@ -139,7 +139,27 @@ Prototype Submission for WebForge – A Smart Campus Webathon
 
 ## Screenshots
 
-(Add screenshots here)
+<img width="1909" height="914" alt="image" src="https://github.com/user-attachments/assets/4b5d3ae5-c16e-4c31-a1c6-21a37ab23e0c" />
+<img width="1918" height="912" alt="image" src="https://github.com/user-attachments/assets/b0ea2459-9903-4d50-b6ba-ded02c5f2e57" />
+<img width="1913" height="912" alt="image" src="https://github.com/user-attachments/assets/377ac114-cd8c-4fb7-8e6c-6e3a41cc3bba" />
+<img width="1912" height="900" alt="image" src="https://github.com/user-attachments/assets/0704ada1-1eb1-4b32-ae54-7941abd31517" />
+<img width="1906" height="901" alt="image" src="https://github.com/user-attachments/assets/91632e89-91a7-446b-b267-149cd3034150" />
+<img width="1916" height="914" alt="image" src="https://github.com/user-attachments/assets/317122b8-381d-4d25-9bfe-e16131872831" />
+<img width="1905" height="904" alt="image" src="https://github.com/user-attachments/assets/bae447eb-14b9-4d2c-ac1c-1877b2ee708b" />
+<img width="1908" height="905" alt="image" src="https://github.com/user-attachments/assets/3636ea64-3c83-4b0c-9276-866a9bda4a65" />
+<img width="1911" height="913" alt="image" src="https://github.com/user-attachments/assets/80d56f6d-2590-4ecb-985d-39c91359db95" />
+<img width="1911" height="915" alt="image" src="https://github.com/user-attachments/assets/1fef3fa0-c021-4111-9344-7163e116717a" />
+<img width="1918" height="914" alt="image" src="https://github.com/user-attachments/assets/c3157123-7f3c-42c0-9fee-f28b804e20cd" />
+
+
+
+
+
+
+
+
+
+
 
 ---
 
