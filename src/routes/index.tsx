@@ -1,29 +1,314 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { GlassCard } from "@/components/GlassCard";
+import { stats, features, testimonials, faqs } from "@/lib/dummy-data";
+import {
+  Brain, QrCode, Zap, ShieldCheck, MessageSquare, BarChart3, ArrowRight,
+  Sparkles, Building2, CheckCircle2, Star, ChevronDown, Github, Twitter, Linkedin,
+} from "lucide-react";
+import { useState } from "react";
+
+const iconMap = { Brain, QrCode, Zap, ShieldCheck, MessageSquare, BarChart3 };
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Your App" },
-      { name: "description", content: "Replace this with a one-sentence description of your app." },
-      { property: "og:title", content: "Your App" },
-      { property: "og:description", content: "Replace this with a one-sentence description of your app." },
+      { title: "HostelX AI — Smart Hostel Management for Universities" },
+      { name: "description", content: "AI-powered hostel management: QR gate passes, complaint routing, predictive analytics, and face verification — built for modern universities." },
     ],
   }),
-  component: Index,
+  component: Landing,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
-function Index() {
+function Landing() {
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
+    <div className="relative min-h-screen overflow-hidden">
+      <div className="absolute inset-0 grid-bg pointer-events-none opacity-40" />
+      <Nav />
+      <Hero />
+      <Stats />
+      <Features />
+      <Showcase />
+      <Testimonials />
+      <FAQ />
+      <CTA />
+      <Footer />
     </div>
+  );
+}
+
+function Nav() {
+  return (
+    <header className="sticky top-0 z-50 border-b border-glass-border backdrop-blur-xl bg-background/60">
+      <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
+        <Link to="/" className="flex items-center gap-2">
+          <div className="grid h-9 w-9 place-items-center rounded-xl bg-gradient-primary shadow-glow">
+            <Building2 className="h-5 w-5 text-primary-foreground" />
+          </div>
+          <span className="font-display text-xl font-bold">HostelX <span className="text-gradient">AI</span></span>
+        </Link>
+        <nav className="hidden gap-8 text-sm text-muted-foreground md:flex">
+          <a href="#features" className="hover:text-foreground">Features</a>
+          <a href="#showcase" className="hover:text-foreground">Showcase</a>
+          <a href="#testimonials" className="hover:text-foreground">Universities</a>
+          <a href="#faq" className="hover:text-foreground">FAQ</a>
+        </nav>
+        <Link to="/app/student" className="group flex items-center gap-2 rounded-xl bg-gradient-primary px-4 py-2 text-sm font-semibold text-primary-foreground shadow-glow transition-transform hover:scale-105">
+          Launch App <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+        </Link>
+      </div>
+    </header>
+  );
+}
+
+function Hero() {
+  return (
+    <section className="relative mx-auto max-w-7xl px-6 pb-24 pt-20 text-center">
+      <div className="absolute left-1/2 top-10 -z-10 h-[500px] w-[800px] -translate-x-1/2 rounded-full bg-primary/20 blur-[120px]" />
+      <div className="animate-fade-up inline-flex items-center gap-2 rounded-full border border-glass-border bg-glass px-4 py-1.5 text-xs font-medium">
+        <Sparkles className="h-3.5 w-3.5 text-accent" />
+        <span className="text-muted-foreground">Trusted by 248 universities across India</span>
+      </div>
+      <h1 className="animate-fade-up mt-6 font-display text-5xl font-bold leading-[1.05] tracking-tight md:text-7xl" style={{ animationDelay: "0.1s" }}>
+        The Operating System for
+        <br />
+        <span className="text-gradient">Modern Hostels.</span>
+      </h1>
+      <p className="animate-fade-up mx-auto mt-6 max-w-2xl text-lg text-muted-foreground" style={{ animationDelay: "0.2s" }}>
+        HostelX AI replaces clipboards, WhatsApp groups, and spreadsheets with one intelligent platform — QR gate passes, predictive analytics, AI complaint routing, and face verification.
+      </p>
+      <div className="animate-fade-up mt-8 flex flex-wrap justify-center gap-3" style={{ animationDelay: "0.3s" }}>
+        <Link to="/app/student" className="group rounded-xl bg-gradient-primary px-6 py-3 text-sm font-semibold text-primary-foreground shadow-glow transition-transform hover:scale-105">
+          Open Live Demo →
+        </Link>
+        <a href="#features" className="glass rounded-xl px-6 py-3 text-sm font-semibold hover:border-primary/40">
+          Explore Features
+        </a>
+      </div>
+
+      {/* Mock dashboard preview */}
+      <div className="animate-fade-up mx-auto mt-16 max-w-5xl" style={{ animationDelay: "0.4s" }}>
+        <div className="glass-strong relative rounded-3xl border border-glass-border p-2 shadow-elegant">
+          <div className="rounded-2xl bg-background/80 p-4">
+            <div className="flex items-center gap-1.5 pb-3">
+              <span className="h-2.5 w-2.5 rounded-full bg-destructive/60" />
+              <span className="h-2.5 w-2.5 rounded-full bg-warning/60" />
+              <span className="h-2.5 w-2.5 rounded-full bg-success/60" />
+              <span className="ml-3 text-xs text-muted-foreground">app.hostelx.ai/dashboard</span>
+            </div>
+            <div className="grid gap-3 md:grid-cols-3">
+              {stats.slice(0, 3).map((s, i) => (
+                <div key={s.label} className="glass animate-fade-up rounded-xl p-4 text-left" style={{ animationDelay: `${0.5 + i * 0.1}s` }}>
+                  <div className="text-xs text-muted-foreground">{s.label}</div>
+                  <div className="mt-1 text-2xl font-bold">{s.value}</div>
+                  <div className="mt-1 text-xs text-success">▲ {s.change}</div>
+                </div>
+              ))}
+            </div>
+            <div className="mt-3 grid gap-3 md:grid-cols-2">
+              <div className="glass h-32 rounded-xl p-4 text-left">
+                <div className="text-xs text-muted-foreground">Live Occupancy</div>
+                <div className="mt-2 flex h-16 items-end gap-1">
+                  {[60, 72, 58, 80, 92, 65, 88, 95, 78, 84, 90, 70].map((v, i) => (
+                    <div key={i} className="flex-1 rounded-t bg-gradient-primary" style={{ height: `${v}%` }} />
+                  ))}
+                </div>
+              </div>
+              <div className="glass h-32 rounded-xl p-4 text-left">
+                <div className="text-xs text-muted-foreground">Recent Complaints</div>
+                <div className="mt-2 space-y-1.5">
+                  {["AC repair · B-302", "Wi-Fi · west wing", "Mess feedback"].map((t) => (
+                    <div key={t} className="flex items-center gap-2 text-xs">
+                      <CheckCircle2 className="h-3 w-3 text-success" /> {t}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Stats() {
+  return (
+    <section className="border-y border-glass-border bg-glass">
+      <div className="mx-auto grid max-w-7xl gap-6 px-6 py-12 md:grid-cols-4">
+        {stats.map((s) => (
+          <div key={s.label} className="text-center">
+            <div className="text-gradient font-display text-4xl font-bold md:text-5xl">{s.value}</div>
+            <div className="mt-1 text-sm text-muted-foreground">{s.label}</div>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function Features() {
+  return (
+    <section id="features" className="mx-auto max-w-7xl px-6 py-24">
+      <div className="mx-auto max-w-2xl text-center">
+        <div className="text-xs font-semibold uppercase tracking-widest text-accent">Capabilities</div>
+        <h2 className="mt-3 font-display text-4xl font-bold md:text-5xl">Everything a hostel needs.<br /><span className="text-gradient">Nothing it doesn't.</span></h2>
+      </div>
+      <div className="mt-14 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+        {features.map((f, i) => {
+          const Icon = iconMap[f.icon as keyof typeof iconMap];
+          return (
+            <GlassCard key={f.title} className="group animate-fade-up" style={{ animationDelay: `${i * 0.05}s` }}>
+              <div className="mb-4 grid h-12 w-12 place-items-center rounded-xl bg-gradient-primary shadow-glow transition-transform group-hover:scale-110">
+                <Icon className="h-6 w-6 text-primary-foreground" />
+              </div>
+              <h3 className="text-lg font-semibold">{f.title}</h3>
+              <p className="mt-2 text-sm text-muted-foreground">{f.desc}</p>
+            </GlassCard>
+          );
+        })}
+      </div>
+    </section>
+  );
+}
+
+function Showcase() {
+  const items = [
+    { role: "Student", desc: "Track fees, electricity, complaints, and generate QR gate passes.", to: "/app/student" },
+    { role: "Warden", desc: "Approve leaves, monitor occupancy, respond to emergencies.", to: "/app/warden" },
+    { role: "Administrator", desc: "Allocate rooms, run reports, see campus-wide analytics.", to: "/app/admin" },
+    { role: "Visitor", desc: "QR registration, identity capture, parent-meeting workflow.", to: "/app/visitors" },
+  ];
+  return (
+    <section id="showcase" className="mx-auto max-w-7xl px-6 py-24">
+      <div className="mx-auto max-w-2xl text-center">
+        <div className="text-xs font-semibold uppercase tracking-widest text-accent">Built for every stakeholder</div>
+        <h2 className="mt-3 font-display text-4xl font-bold md:text-5xl">One platform.<br /><span className="text-gradient">Four tailored experiences.</span></h2>
+      </div>
+      <div className="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+        {items.map((it, i) => (
+          <Link key={it.role} to={it.to} className="glass group relative overflow-hidden rounded-2xl p-6 shadow-elegant transition-all hover:border-primary/40 hover:shadow-glow animate-fade-up" style={{ animationDelay: `${i * 0.05}s` }}>
+            <div className="text-xs uppercase tracking-widest text-accent">{it.role}</div>
+            <div className="mt-3 text-lg font-semibold">{it.desc}</div>
+            <div className="mt-6 flex items-center gap-2 text-sm font-medium text-primary-glow">
+              Open dashboard <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+            </div>
+            <div className="absolute -right-10 -top-10 h-32 w-32 rounded-full bg-primary/20 blur-2xl transition-opacity group-hover:opacity-80" />
+          </Link>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function Testimonials() {
+  return (
+    <section id="testimonials" className="mx-auto max-w-7xl px-6 py-24">
+      <div className="mx-auto max-w-2xl text-center">
+        <div className="text-xs font-semibold uppercase tracking-widest text-accent">Loved by universities</div>
+        <h2 className="mt-3 font-display text-4xl font-bold md:text-5xl">Real teams. Real impact.</h2>
+      </div>
+      <div className="mt-14 grid gap-5 md:grid-cols-3">
+        {testimonials.map((t, i) => (
+          <GlassCard key={t.name} className="animate-fade-up" style={{ animationDelay: `${i * 0.08}s` }}>
+            <div className="mb-3 flex gap-0.5">
+              {Array.from({ length: 5 }).map((_, j) => <Star key={j} className="h-4 w-4 fill-accent text-accent" />)}
+            </div>
+            <p className="text-sm leading-relaxed">"{t.quote}"</p>
+            <div className="mt-5 flex items-center gap-3 border-t border-glass-border pt-4">
+              <div className="grid h-10 w-10 place-items-center rounded-full bg-gradient-primary font-bold text-primary-foreground">{t.name[0]}</div>
+              <div>
+                <div className="text-sm font-semibold">{t.name}</div>
+                <div className="text-xs text-muted-foreground">{t.role}</div>
+              </div>
+            </div>
+          </GlassCard>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function FAQ() {
+  const [open, setOpen] = useState(0);
+  return (
+    <section id="faq" className="mx-auto max-w-3xl px-6 py-24">
+      <div className="text-center">
+        <div className="text-xs font-semibold uppercase tracking-widest text-accent">FAQ</div>
+        <h2 className="mt-3 font-display text-4xl font-bold">Questions, answered.</h2>
+      </div>
+      <div className="mt-10 space-y-3">
+        {faqs.map((f, i) => (
+          <button key={f.q} onClick={() => setOpen(open === i ? -1 : i)} className="glass w-full rounded-2xl p-5 text-left transition-all hover:border-primary/40">
+            <div className="flex items-center justify-between gap-4">
+              <span className="font-semibold">{f.q}</span>
+              <ChevronDown className={`h-4 w-4 shrink-0 transition-transform ${open === i ? "rotate-180" : ""}`} />
+            </div>
+            {open === i && <p className="mt-3 text-sm text-muted-foreground">{f.a}</p>}
+          </button>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function CTA() {
+  return (
+    <section className="mx-auto max-w-5xl px-6 pb-24">
+      <div className="glass-strong relative overflow-hidden rounded-3xl p-12 text-center shadow-elegant">
+        <div className="absolute inset-0 bg-gradient-primary opacity-20" />
+        <div className="relative">
+          <h2 className="font-display text-4xl font-bold md:text-5xl">Ready to modernize your hostels?</h2>
+          <p className="mx-auto mt-3 max-w-xl text-muted-foreground">Spin up a live demo in seconds. No setup. No credit card. Just see it work.</p>
+          <Link to="/app/student" className="mt-8 inline-flex items-center gap-2 rounded-xl bg-gradient-primary px-8 py-4 font-semibold text-primary-foreground shadow-glow transition-transform hover:scale-105">
+            Launch HostelX AI <ArrowRight className="h-5 w-5" />
+          </Link>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Footer() {
+  return (
+    <footer className="border-t border-glass-border">
+      <div className="mx-auto grid max-w-7xl gap-8 px-6 py-12 md:grid-cols-4">
+        <div>
+          <div className="flex items-center gap-2">
+            <div className="grid h-9 w-9 place-items-center rounded-xl bg-gradient-primary shadow-glow">
+              <Building2 className="h-5 w-5 text-primary-foreground" />
+            </div>
+            <span className="font-display text-xl font-bold">HostelX <span className="text-gradient">AI</span></span>
+          </div>
+          <p className="mt-3 text-sm text-muted-foreground">The intelligent operating system for university residences.</p>
+        </div>
+        <div>
+          <div className="text-sm font-semibold">Product</div>
+          <ul className="mt-3 space-y-2 text-sm text-muted-foreground">
+            <li><a href="#features" className="hover:text-foreground">Features</a></li>
+            <li><Link to="/app/analytics" className="hover:text-foreground">Analytics</Link></li>
+            <li><Link to="/app/assistant" className="hover:text-foreground">AI Assistant</Link></li>
+          </ul>
+        </div>
+        <div>
+          <div className="text-sm font-semibold">Roles</div>
+          <ul className="mt-3 space-y-2 text-sm text-muted-foreground">
+            <li><Link to="/app/student" className="hover:text-foreground">Students</Link></li>
+            <li><Link to="/app/warden" className="hover:text-foreground">Wardens</Link></li>
+            <li><Link to="/app/admin" className="hover:text-foreground">Administrators</Link></li>
+          </ul>
+        </div>
+        <div>
+          <div className="text-sm font-semibold">Connect</div>
+          <div className="mt-3 flex gap-3 text-muted-foreground">
+            <a href="#" className="glass grid h-9 w-9 place-items-center rounded-lg hover:text-foreground"><Github className="h-4 w-4" /></a>
+            <a href="#" className="glass grid h-9 w-9 place-items-center rounded-lg hover:text-foreground"><Twitter className="h-4 w-4" /></a>
+            <a href="#" className="glass grid h-9 w-9 place-items-center rounded-lg hover:text-foreground"><Linkedin className="h-4 w-4" /></a>
+          </div>
+        </div>
+      </div>
+      <div className="border-t border-glass-border px-6 py-5 text-center text-xs text-muted-foreground">
+        © 2026 HostelX AI · Built for the future of campus living
+      </div>
+    </footer>
   );
 }

@@ -9,38 +9,158 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as AppRouteImport } from './routes/app'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AppWardenRouteImport } from './routes/app.warden'
+import { Route as AppVisitorsRouteImport } from './routes/app.visitors'
+import { Route as AppStudentRouteImport } from './routes/app.student'
+import { Route as AppSecurityRouteImport } from './routes/app.security'
+import { Route as AppComplaintsRouteImport } from './routes/app.complaints'
+import { Route as AppAssistantRouteImport } from './routes/app.assistant'
+import { Route as AppAnalyticsRouteImport } from './routes/app.analytics'
+import { Route as AppAdminRouteImport } from './routes/app.admin'
 
+const AppRoute = AppRouteImport.update({
+  id: '/app',
+  path: '/app',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AppWardenRoute = AppWardenRouteImport.update({
+  id: '/warden',
+  path: '/warden',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppVisitorsRoute = AppVisitorsRouteImport.update({
+  id: '/visitors',
+  path: '/visitors',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppStudentRoute = AppStudentRouteImport.update({
+  id: '/student',
+  path: '/student',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppSecurityRoute = AppSecurityRouteImport.update({
+  id: '/security',
+  path: '/security',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppComplaintsRoute = AppComplaintsRouteImport.update({
+  id: '/complaints',
+  path: '/complaints',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppAssistantRoute = AppAssistantRouteImport.update({
+  id: '/assistant',
+  path: '/assistant',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppAnalyticsRoute = AppAnalyticsRouteImport.update({
+  id: '/analytics',
+  path: '/analytics',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppAdminRoute = AppAdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => AppRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/app': typeof AppRouteWithChildren
+  '/app/admin': typeof AppAdminRoute
+  '/app/analytics': typeof AppAnalyticsRoute
+  '/app/assistant': typeof AppAssistantRoute
+  '/app/complaints': typeof AppComplaintsRoute
+  '/app/security': typeof AppSecurityRoute
+  '/app/student': typeof AppStudentRoute
+  '/app/visitors': typeof AppVisitorsRoute
+  '/app/warden': typeof AppWardenRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/app': typeof AppRouteWithChildren
+  '/app/admin': typeof AppAdminRoute
+  '/app/analytics': typeof AppAnalyticsRoute
+  '/app/assistant': typeof AppAssistantRoute
+  '/app/complaints': typeof AppComplaintsRoute
+  '/app/security': typeof AppSecurityRoute
+  '/app/student': typeof AppStudentRoute
+  '/app/visitors': typeof AppVisitorsRoute
+  '/app/warden': typeof AppWardenRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/app': typeof AppRouteWithChildren
+  '/app/admin': typeof AppAdminRoute
+  '/app/analytics': typeof AppAnalyticsRoute
+  '/app/assistant': typeof AppAssistantRoute
+  '/app/complaints': typeof AppComplaintsRoute
+  '/app/security': typeof AppSecurityRoute
+  '/app/student': typeof AppStudentRoute
+  '/app/visitors': typeof AppVisitorsRoute
+  '/app/warden': typeof AppWardenRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/app'
+    | '/app/admin'
+    | '/app/analytics'
+    | '/app/assistant'
+    | '/app/complaints'
+    | '/app/security'
+    | '/app/student'
+    | '/app/visitors'
+    | '/app/warden'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/app'
+    | '/app/admin'
+    | '/app/analytics'
+    | '/app/assistant'
+    | '/app/complaints'
+    | '/app/security'
+    | '/app/student'
+    | '/app/visitors'
+    | '/app/warden'
+  id:
+    | '__root__'
+    | '/'
+    | '/app'
+    | '/app/admin'
+    | '/app/analytics'
+    | '/app/assistant'
+    | '/app/complaints'
+    | '/app/security'
+    | '/app/student'
+    | '/app/visitors'
+    | '/app/warden'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AppRoute: typeof AppRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/app': {
+      id: '/app'
+      path: '/app'
+      fullPath: '/app'
+      preLoaderRoute: typeof AppRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -48,22 +168,93 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/app/warden': {
+      id: '/app/warden'
+      path: '/warden'
+      fullPath: '/app/warden'
+      preLoaderRoute: typeof AppWardenRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/visitors': {
+      id: '/app/visitors'
+      path: '/visitors'
+      fullPath: '/app/visitors'
+      preLoaderRoute: typeof AppVisitorsRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/student': {
+      id: '/app/student'
+      path: '/student'
+      fullPath: '/app/student'
+      preLoaderRoute: typeof AppStudentRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/security': {
+      id: '/app/security'
+      path: '/security'
+      fullPath: '/app/security'
+      preLoaderRoute: typeof AppSecurityRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/complaints': {
+      id: '/app/complaints'
+      path: '/complaints'
+      fullPath: '/app/complaints'
+      preLoaderRoute: typeof AppComplaintsRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/assistant': {
+      id: '/app/assistant'
+      path: '/assistant'
+      fullPath: '/app/assistant'
+      preLoaderRoute: typeof AppAssistantRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/analytics': {
+      id: '/app/analytics'
+      path: '/analytics'
+      fullPath: '/app/analytics'
+      preLoaderRoute: typeof AppAnalyticsRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/admin': {
+      id: '/app/admin'
+      path: '/admin'
+      fullPath: '/app/admin'
+      preLoaderRoute: typeof AppAdminRouteImport
+      parentRoute: typeof AppRoute
+    }
   }
 }
 
+interface AppRouteChildren {
+  AppAdminRoute: typeof AppAdminRoute
+  AppAnalyticsRoute: typeof AppAnalyticsRoute
+  AppAssistantRoute: typeof AppAssistantRoute
+  AppComplaintsRoute: typeof AppComplaintsRoute
+  AppSecurityRoute: typeof AppSecurityRoute
+  AppStudentRoute: typeof AppStudentRoute
+  AppVisitorsRoute: typeof AppVisitorsRoute
+  AppWardenRoute: typeof AppWardenRoute
+}
+
+const AppRouteChildren: AppRouteChildren = {
+  AppAdminRoute: AppAdminRoute,
+  AppAnalyticsRoute: AppAnalyticsRoute,
+  AppAssistantRoute: AppAssistantRoute,
+  AppComplaintsRoute: AppComplaintsRoute,
+  AppSecurityRoute: AppSecurityRoute,
+  AppStudentRoute: AppStudentRoute,
+  AppVisitorsRoute: AppVisitorsRoute,
+  AppWardenRoute: AppWardenRoute,
+}
+
+const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AppRoute: AppRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
