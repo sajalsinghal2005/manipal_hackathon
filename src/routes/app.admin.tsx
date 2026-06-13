@@ -9,7 +9,7 @@ import { Download, Plus, Search } from "lucide-react";
 export const Route = createFileRoute("/app/admin")({ component: AdminDashboard });
 
 const students = [
-  { id: "21CS101", name: "Aarav Kumar", room: "B-302", branch: "CSE", fee: "Paid", elec: "142u" },
+  { id: "21CS101", name: "Sajal Singhal", room: "B-302", branch: "CSE", fee: "Paid", elec: "142u" },
   { id: "21EC044", name: "Sneha Reddy", room: "A-204", branch: "ECE", fee: "Paid", elec: "98u" },
   { id: "22ME011", name: "Mohit Sharma", room: "C-118", branch: "MECH", fee: "Due", elec: "118u" },
   { id: "21CH077", name: "Riya Patel", room: "A-110", branch: "CHEM", fee: "Paid", elec: "76u" },

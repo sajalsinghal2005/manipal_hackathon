@@ -27,6 +27,48 @@ export const faqs = [
   { q: "Does it work offline?", a: "Core gate-pass and complaint flows work offline and sync when connectivity is restored." },
 ];
 
+export const universityLogos = [
+  "IIT Delhi",
+  "BITS Pilani",
+  "NIT Trichy",
+  "IIIT Hyderabad",
+  "ISM Dhanbad",
+  "IISc Bangalore",
+];
+
+export const pricingPlans = [
+  {
+    name: "Campus Starter",
+    price: "₹29,999",
+    period: "one-time",
+    description: "Launch one hostel with essential automation, gate-pass, and complaint tracking.",
+    features: ["Student dashboard", "Visitor QR pass", "Basic analytics", "Email support"],
+    highlight: false,
+  },
+  {
+    name: "Hostel Pro",
+    price: "₹79,999",
+    period: "annual",
+    description: "Designed for multi-hostel campuses with AI insights, warden tools and smart alerts.",
+    features: ["Occupancy forecasting", "AI complaint routing", "Visitor management", "Priority support"],
+    highlight: true,
+  },
+  {
+    name: "Institutional Elite",
+    price: "Custom",
+    period: "quote",
+    description: "Full enterprise package with SIS integrations, predictive maintenance, and rollout support.",
+    features: ["ERP / SSO integration", "Custom dashboards", "Onboarding support", "Data migration"],
+    highlight: false,
+  },
+];
+
+export const contactCards = [
+  { title: "Product demo", value: "sales@hostelx.ai", detail: "Book a walkthrough with our product specialist.", type: "email" },
+  { title: "University partnerships", value: "partners@hostelx.ai", detail: "Discuss campus pilot programs and research collaborations.", type: "email" },
+  { title: "Headquarters", value: "Bengaluru, India", detail: "Global support for higher education institutions.", type: "location" },
+];
+
 export const occupancyData = [
   { month: "Jan", occupancy: 78, capacity: 100 },
   { month: "Feb", occupancy: 82, capacity: 100 },
@@ -56,7 +98,7 @@ export const electricityUsage = [
 ];
 
 export const complaints = [
-  { id: "CMP-2418", title: "AC not cooling in Room 302", category: "Electrical", priority: "High", status: "In Progress", student: "Aarav Kumar", room: "B-302", date: "2h ago", aiScore: 92 },
+  { id: "CMP-2418", title: "AC not cooling in Room 302", category: "Electrical", priority: "High", status: "In Progress", student: "Sajal Singhal", room: "B-302", date: "2h ago", aiScore: 92 },
   { id: "CMP-2417", title: "Water leakage near washbasin", category: "Plumbing", priority: "Medium", status: "Assigned", student: "Sneha Reddy", room: "A-204", date: "5h ago", aiScore: 78 },
   { id: "CMP-2416", title: "Wi-Fi slow in west wing", category: "Network", priority: "Low", status: "Open", student: "Mohit Sharma", room: "C-118", date: "1d ago", aiScore: 45 },
   { id: "CMP-2415", title: "Mess food quality complaint", category: "Mess", priority: "High", status: "Resolved", student: "Riya Patel", room: "A-110", date: "1d ago", aiScore: 88 },
@@ -65,14 +107,14 @@ export const complaints = [
 ];
 
 export const visitors = [
-  { id: "VIS-9821", name: "Rahul Mehta", visiting: "Aarav Kumar (B-302)", purpose: "Family Visit", checkIn: "10:42 AM", status: "Inside", phone: "+91 98•••32" },
+  { id: "VIS-9821", name: "Rahul Mehta", visiting: "Sajal Singhal (B-302)", purpose: "Family Visit", checkIn: "10:42 AM", status: "Inside", phone: "+91 98•••32" },
   { id: "VIS-9820", name: "Geeta Devi", visiting: "Sneha Reddy (A-204)", purpose: "Parent Meeting", checkIn: "10:15 AM", status: "Inside", phone: "+91 99•••18" },
   { id: "VIS-9819", name: "Amit Joshi", visiting: "Mohit Sharma (C-118)", purpose: "Document Drop", checkIn: "09:30 AM", status: "Exited", phone: "+91 97•••55" },
   { id: "VIS-9818", name: "Pooja Iyer", visiting: "Riya Patel (A-110)", purpose: "Family Visit", checkIn: "Yesterday", status: "Exited", phone: "+91 98•••91" },
 ];
 
 export const leaveRequests = [
-  { id: "LV-552", student: "Aarav Kumar", room: "B-302", from: "Dec 18", to: "Dec 22", reason: "Family function", status: "Pending" },
+  { id: "LV-552", student: "Sajal Singhal", room: "B-302", from: "Dec 18", to: "Dec 22", reason: "Family function", status: "Pending" },
   { id: "LV-551", student: "Sneha Reddy", room: "A-204", from: "Dec 15", to: "Dec 17", reason: "Medical", status: "Approved" },
   { id: "LV-550", student: "Riya Patel", room: "A-110", from: "Dec 20", to: "Jan 02", reason: "Winter break", status: "Pending" },
 ];
@@ -98,3 +140,18 @@ export const chatMessages = [
   { role: "user", text: "How do I apply for leave?" },
   { role: "ai", text: "Go to Student Dashboard → Leave Requests → New Request. Wardens typically approve within 4 hours." },
 ];
+export const userProfile = {
+  name: "Sajal Singhal",
+  initials: "SS",
+  role: "Student Representative",
+  email: "sajal.singhal@hostelx.ai",
+  phone: "+91 98234 56789",
+  room: "B-302",
+  hostel: "Bhaskara Hostel, Block B",
+  joined: "Aug 2023",
+  integrations: [
+    { name: "Campus ID", status: "Active", icon: "ID" },
+    { name: "Mess Wallet", status: "Auto top-up", icon: "₹" },
+    { name: "Guest Pass", status: "Enabled", icon: "QR" },
+  ],
+};

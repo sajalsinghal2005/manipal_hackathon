@@ -55,7 +55,7 @@ function SecurityPage() {
               <Step ok={true} label="Camera initialized" />
               <Step ok={scanning || verified} label="Face detected" />
               <Step ok={verified} label="Liveness check passed" />
-              <Step ok={verified} label="Identity matched · Aarav Kumar" />
+              <Step ok={verified} label="Identity matched · Sajal Singhal" />
               <Step ok={verified} label="Access granted · Gate A" />
               <button onClick={startScan} disabled={scanning} className="mt-5 rounded-xl bg-gradient-primary py-2.5 text-sm font-semibold text-primary-foreground shadow-glow disabled:opacity-60">
                 {scanning ? "Scanning…" : verified ? "Re-scan" : "Start Verification"}
@@ -92,7 +92,7 @@ function SecurityPage() {
           <h3 className="mb-3 text-lg font-semibold flex items-center gap-2"><Activity className="h-5 w-5 text-primary-glow" /> Security Event Log</h3>
           <div className="space-y-2">
             {[
-              { t: "2 min ago", ok: true, msg: "Face verified · Aarav Kumar entered Gate A" },
+              { t: "2 min ago", ok: true, msg: "Face verified · Sajal Singhal entered Gate A" },
               { t: "8 min ago", ok: true, msg: "Visitor VIS-9821 issued QR pass" },
               { t: "14 min ago", ok: false, msg: "Failed face match · retry triggered (Gate B)" },
               { t: "32 min ago", ok: true, msg: "Roll-call completed · 408/412 present" },

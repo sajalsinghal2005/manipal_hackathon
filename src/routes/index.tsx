@@ -1,13 +1,29 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { GlassCard } from "@/components/GlassCard";
-import { stats, features, testimonials, faqs } from "@/lib/dummy-data";
+import { stats, features, testimonials, faqs, universityLogos, pricingPlans, contactCards } from "@/lib/dummy-data";
 import {
   Brain, QrCode, Zap, ShieldCheck, MessageSquare, BarChart3, ArrowRight,
   Sparkles, Building2, CheckCircle2, Star, ChevronDown, Github, Twitter, Linkedin,
+  Layers, Phone, Wifi, Cpu, Mic, Shield, Activity, Award, Mail, MapPin, DollarSign,
 } from "lucide-react";
 import { useState } from "react";
 
 const iconMap = { Brain, QrCode, Zap, ShieldCheck, MessageSquare, BarChart3 };
+const architectureSteps = [
+  { icon: Building2, title: "Student data capture", desc: "Room profiles, fee status, complaints and visitor logs flow into one secure campus record." },
+  { icon: Shield, title: "Warden coordination", desc: "AI-powered approvals, emergency alerts, and complaint routing keep operations aligned." },
+  { icon: Activity, title: "Admin analytics", desc: "Revenue, occupancy, electricity and mess metrics are visualized for fast decisions." },
+  { icon: Cpu, title: "AI database sync", desc: "Trends, heatmaps and predictions are generated from real-time hostel telemetry." },
+];
+
+const futureScopeItems = [
+  { icon: Phone, title: "Mobile app", desc: "Native student and warden experiences for campus, mess and visitor flows." },
+  { icon: Zap, title: "IoT meters", desc: "Smart electricity metering and predictive billing inputs deliver deep energy insights." },
+  { icon: Mic, title: "Voice assistant", desc: "Voice-based hostel helpdesk for queries, leave requests and emergency support." },
+  { icon: ShieldCheck, title: "RFID attendance", desc: "Touchless attendance, secure access and real-time presence for every hostel wing." },
+  { icon: Layers, title: "Smart allocation", desc: "AI room placement, roommate matching and capacity balancing across hostels." },
+  { icon: Wifi, title: "Predictive maintenance", desc: "AI alerts identify plumbing, power and infrastructure hotspots before issues escalate." },
+];
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -26,9 +42,15 @@ function Landing() {
       <Nav />
       <Hero />
       <Stats />
+      <LoadingSkeletons />
       <Features />
       <Showcase />
+      <Architecture />
+      <UniversityLogos />
+      <Pricing />
       <Testimonials />
+      <FutureScope />
+      <Contact />
       <FAQ />
       <CTA />
       <Footer />
@@ -49,7 +71,9 @@ function Nav() {
         <nav className="hidden gap-8 text-sm text-muted-foreground md:flex">
           <a href="#features" className="hover:text-foreground">Features</a>
           <a href="#showcase" className="hover:text-foreground">Showcase</a>
+          <a href="#pricing" className="hover:text-foreground">Pricing</a>
           <a href="#testimonials" className="hover:text-foreground">Universities</a>
+          <a href="#contact" className="hover:text-foreground">Contact</a>
           <a href="#faq" className="hover:text-foreground">FAQ</a>
         </nav>
         <Link to="/app/student" className="group flex items-center gap-2 rounded-xl bg-gradient-primary px-4 py-2 text-sm font-semibold text-primary-foreground shadow-glow transition-transform hover:scale-105">
@@ -146,6 +170,38 @@ function Stats() {
   );
 }
 
+function LoadingSkeletons() {
+  return (
+    <section className="mx-auto max-w-7xl px-6 py-20">
+      <div className="mx-auto max-w-2xl text-center">
+        <div className="text-xs font-semibold uppercase tracking-widest text-accent">Pitch-ready polish</div>
+        <h2 className="mt-3 font-display text-4xl font-bold md:text-5xl">See the experience before you build it.</h2>
+        <p className="mt-4 text-sm text-muted-foreground">Premium startup landing pages use motion and thoughtful details to turn vision into belief.</p>
+      </div>
+      <div className="mt-12 grid gap-5 md:grid-cols-3">
+        {Array.from({ length: 3 }).map((_, index) => (
+          <div key={index} className="glass animate-fade-up rounded-3xl p-6 shadow-elegant" style={{ animationDelay: `${index * 0.05}s` }}>
+            <div className="flex items-center justify-between">
+              <div className="h-3 w-20 rounded-full bg-muted/30" />
+              <div className="h-3 w-10 rounded-full bg-muted/30" />
+            </div>
+            <div className="mt-6 space-y-3">
+              <div className="h-5 w-3/4 rounded-full bg-muted/20 animate-shimmer" />
+              <div className="h-5 w-full rounded-full bg-muted/20 animate-shimmer" />
+              <div className="h-5 w-5/6 rounded-full bg-muted/20 animate-shimmer" />
+              <div className="mt-4 grid gap-2">
+                <div className="h-3 rounded-full bg-muted/20 animate-shimmer" />
+                <div className="h-3 rounded-full bg-muted/20 animate-shimmer" />
+                <div className="h-3 rounded-full bg-muted/20 animate-shimmer" />
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+}
+
 function Features() {
   return (
     <section id="features" className="mx-auto max-w-7xl px-6 py-24">
@@ -195,6 +251,161 @@ function Showcase() {
             <div className="absolute -right-10 -top-10 h-32 w-32 rounded-full bg-primary/20 blur-2xl transition-opacity group-hover:opacity-80" />
           </Link>
         ))}
+      </div>
+    </section>
+  );
+}
+
+function Architecture() {
+  return (
+    <section className="mx-auto max-w-7xl px-6 py-24">
+      <div className="mx-auto max-w-2xl text-center">
+        <div className="text-xs font-semibold uppercase tracking-widest text-accent">Architecture</div>
+        <h2 className="mt-3 font-display text-4xl font-bold md:text-5xl">Student → Warden → Admin → Analytics</h2>
+        <p className="mt-4 text-sm text-muted-foreground">HostelX AI connects every role through secure event-driven flows, predictive insights, and one-click actions.</p>
+      </div>
+      <div className="mt-14 grid gap-5 md:grid-cols-4">
+        {architectureSteps.map((step, index) => {
+          const Icon = step.icon;
+          return (
+            <GlassCard key={step.title} className="animate-fade-up" style={{ animationDelay: `${index * 0.05}s` }}>
+              <div className="grid h-12 w-12 place-items-center rounded-2xl bg-gradient-primary shadow-glow">
+                <Icon className="h-6 w-6 text-primary-foreground" />
+              </div>
+              <h3 className="mt-4 text-lg font-semibold">{step.title}</h3>
+              <p className="mt-2 text-sm text-muted-foreground">{step.desc}</p>
+            </GlassCard>
+          );
+        })}
+      </div>
+    </section>
+  );
+}
+
+function UniversityLogos() {
+  return (
+    <section className="mx-auto max-w-7xl px-6 py-24">
+      <div className="mx-auto max-w-2xl text-center">
+        <div className="text-xs font-semibold uppercase tracking-widest text-accent">Trusted by leading campuses</div>
+        <h2 className="mt-3 font-display text-4xl font-bold md:text-5xl">Campus-ready adoption in every zone.</h2>
+        <p className="mt-4 text-sm text-muted-foreground">HostelX AI is already being pitched, piloted, and adopted by top technical and residential campuses.</p>
+      </div>
+      <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {universityLogos.map((logo, index) => (
+          <div key={logo} className="glass flex items-center justify-between rounded-3xl border border-glass-border p-6 shadow-elegant animate-fade-up" style={{ animationDelay: `${index * 0.04}s` }}>
+            <div>
+              <div className="text-sm font-semibold">{logo}</div>
+              <div className="mt-2 text-xs text-muted-foreground">Early adopter</div>
+            </div>
+            <div className="grid h-12 w-12 place-items-center rounded-2xl bg-primary/10 text-primary-glow">{logo[0]}</div>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function Pricing() {
+  return (
+    <section id="pricing" className="mx-auto max-w-7xl px-6 py-24">
+      <div className="mx-auto max-w-2xl text-center">
+        <div className="text-xs font-semibold uppercase tracking-widest text-accent">Pricing</div>
+        <h2 className="mt-3 font-display text-4xl font-bold md:text-5xl">Designed to fit campus budgets and scale.</h2>
+        <p className="mt-4 text-sm text-muted-foreground">Choose a plan for pilot deployment or full enterprise rollout with the flexibility modern universities need.</p>
+      </div>
+      <div className="mt-12 grid gap-6 xl:grid-cols-3">
+        {pricingPlans.map((plan, index) => (
+          <div key={plan.name} className={`glass rounded-3xl border ${plan.highlight ? 'border-primary/40 bg-primary/5' : 'border-glass-border'} p-8 shadow-elegant animate-fade-up`} style={{ animationDelay: `${index * 0.05}s` }}>
+            <div className="flex items-center justify-between gap-3">
+              <div>
+                <div className="text-sm font-semibold uppercase tracking-[0.2em] text-accent">{plan.name}</div>
+                <div className="mt-2 text-3xl font-bold">{plan.price}</div>
+              </div>
+              <div className="grid h-12 w-12 place-items-center rounded-2xl bg-primary/10 text-primary-glow">
+                <DollarSign className="h-5 w-5" />
+              </div>
+            </div>
+            <p className="mt-5 text-sm text-muted-foreground">{plan.description}</p>
+            <ul className="mt-6 space-y-3 text-sm text-muted-foreground">
+              {plan.features.map((feature) => (
+                <li key={feature} className="flex items-start gap-3">
+                  <CheckCircle2 className="mt-1 h-4 w-4 text-success" />
+                  <span>{feature}</span>
+                </li>
+              ))}
+            </ul>
+            <button className={`mt-8 w-full rounded-2xl py-3 text-sm font-semibold transition ${plan.highlight ? 'bg-gradient-primary text-primary-foreground shadow-glow' : 'bg-glass text-foreground hover:border-primary/30 hover:bg-primary/5'}`}>
+              {plan.highlight ? 'Most popular' : 'Select plan'}
+            </button>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function Contact() {
+  return (
+    <section id="contact" className="mx-auto max-w-7xl px-6 py-24">
+      <div className="mx-auto max-w-2xl text-center">
+        <div className="text-xs font-semibold uppercase tracking-widest text-accent">Contact</div>
+        <h2 className="mt-3 font-display text-4xl font-bold md:text-5xl">Let's bring your campus vision alive.</h2>
+        <p className="mt-4 text-sm text-muted-foreground">Talk to our team about pilots, integrations, or setting up a live campus demo.</p>
+      </div>
+      <div className="mt-12 grid gap-6 lg:grid-cols-3">
+        {contactCards.map((card, index) => (
+          <div key={card.title} className="glass rounded-3xl border border-glass-border p-6 shadow-elegant animate-fade-up" style={{ animationDelay: `${index * 0.05}s` }}>
+            <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-primary/10 text-primary-glow">
+              {card.type === 'email' ? <Mail className="h-5 w-5" /> : <MapPin className="h-5 w-5" />}
+            </div>
+            <div className="mt-5 text-sm font-semibold">{card.title}</div>
+            <div className="mt-2 text-sm text-foreground">{card.value}</div>
+            <p className="mt-3 text-sm text-muted-foreground">{card.detail}</p>
+          </div>
+        ))}
+      </div>
+      <div className="mt-12 rounded-[2rem] border border-glass-border bg-glass p-8 shadow-elegant">
+        <div className="grid gap-6 lg:grid-cols-2">
+          <div className="space-y-4">
+            <div className="text-sm font-semibold uppercase tracking-widest text-accent">Start your pilot</div>
+            <h3 className="text-3xl font-semibold">Fast onboarding, campus-grade support.</h3>
+            <p className="text-sm text-muted-foreground">Our team helps your campus transition in weeks, not months. We handle data mapping, training, and product launch guidance.</p>
+          </div>
+          <div className="space-y-4">
+            <input className="w-full rounded-3xl border border-glass-border bg-background/60 px-4 py-3 text-sm text-foreground outline-none transition focus:border-primary/40" placeholder="Your name" />
+            <input className="w-full rounded-3xl border border-glass-border bg-background/60 px-4 py-3 text-sm text-foreground outline-none transition focus:border-primary/40" placeholder="Your email" />
+            <button className="w-full rounded-3xl bg-gradient-primary px-4 py-3 text-sm font-semibold text-primary-foreground shadow-glow transition-transform hover:-translate-y-0.5">Request demo</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function FutureScope() {
+  return (
+    <section className="mx-auto max-w-7xl px-6 py-24">
+      <div className="mx-auto max-w-2xl text-center">
+        <div className="text-xs font-semibold uppercase tracking-widest text-accent">Future scope</div>
+        <h2 className="mt-3 font-display text-4xl font-bold md:text-5xl">Hackathon-ready roadmap</h2>
+      </div>
+      <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        {futureScopeItems.map((item, index) => {
+          const Icon = item.icon;
+          return (
+            <GlassCard key={item.title} className="animate-fade-up" style={{ animationDelay: `${index * 0.05}s` }}>
+              <div className="flex items-center gap-3">
+                <div className="grid h-12 w-12 place-items-center rounded-2xl bg-primary/15 text-primary-glow">
+                  <Icon className="h-6 w-6" />
+                </div>
+                <div>
+                  <h3 className="font-semibold">{item.title}</h3>
+                </div>
+              </div>
+              <p className="mt-4 text-sm text-muted-foreground">{item.desc}</p>
+            </GlassCard>
+          );
+        })}
       </div>
     </section>
   );

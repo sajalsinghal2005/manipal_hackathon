@@ -3,7 +3,7 @@ import { PageHeader } from "@/components/PageHeader";
 import { GlassCard } from "@/components/GlassCard";
 import { complaints, complaintCategories } from "@/lib/dummy-data";
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } from "recharts";
-import { Sparkles, Filter, Plus } from "lucide-react";
+import { Sparkles, Filter, Plus, Search } from "lucide-react";
 import { useState } from "react";
 
 export const Route = createFileRoute("/app/complaints")({ component: ComplaintsPage });
@@ -22,7 +22,10 @@ const statusColor: Record<string, string> = {
 
 function ComplaintsPage() {
   const [filter, setFilter] = useState("All");
-  const filtered = filter === "All" ? complaints : complaints.filter(c => c.status === filter);
+  const [query, setQuery] = useState("");
+  const filtered = complaints
+    .filter((c) => filter === "All" || c.status === filter)
+    .filter((c) => c.title.toLowerCase().includes(query.toLowerCase()) || c.student.toLowerCase().includes(query.toLowerCase()) || c.room.toLowerCase().includes(query.toLowerCase()));
 
   return (
     <>
@@ -50,7 +53,16 @@ function ComplaintsPage() {
         <GlassCard className="lg:col-span-2">
           <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
             <h3 className="text-lg font-semibold">Complaints Feed</h3>
-            <div className="flex items-center gap-2">
+            <div className="flex flex-wrap items-center gap-2">
+              <div className="glass flex items-center gap-2 rounded-2xl border border-glass-border px-3 py-2">
+                <Search className="h-4 w-4 text-muted-foreground" />
+                <input
+                  value={query}
+                  onChange={(e) => setQuery(e.target.value)}
+                  placeholder="Search complaints"
+                  className="w-40 bg-transparent text-sm outline-none placeholder:text-muted-foreground"
+                />
+              </div>
               <div className="flex rounded-xl border border-glass-border bg-glass p-1">
                 {["All", "Open", "In Progress", "Resolved"].map((s) => (
                   <button key={s} onClick={() => setFilter(s)}

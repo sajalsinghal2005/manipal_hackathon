@@ -16,7 +16,7 @@ function StudentDashboard() {
   return (
     <>
       <PageHeader
-        title="Welcome back, Aarav 👋"
+        title="Welcome back, Sajal 👋"
         subtitle="Room B-302 · Bhaskara Hostel · Block B"
         actions={
           <button className="hidden rounded-xl bg-gradient-primary px-4 py-2 text-sm font-semibold text-primary-foreground shadow-glow md:inline-flex">
@@ -63,7 +63,7 @@ function StudentDashboard() {
           <h3 className="text-lg font-semibold">Digital Gate Pass</h3>
           <p className="mb-4 text-xs text-muted-foreground">Valid till 18 Dec 2026, 10:00 PM</p>
           <div className="animate-pulse-glow rounded-2xl p-2">
-            <QRBlock size={170} seed="aarav-b302-1218" />
+            <QRBlock size={170} seed="sajal-b302-1218" />
           </div>
           <div className="mt-4 w-full space-y-1 text-left text-xs">
             <Row label="Pass ID" value="GP-AK-99182" />
@@ -124,7 +124,33 @@ function StudentDashboard() {
         <Action icon={Wallet} label="Pay Fees" desc="UPI · Card · Net Banking" />
         <Action icon={BedDouble} label="Request Room Change" desc="Roommate preferences supported" />
       </div>
-    </>
+      <GlassCard className="mt-6">
+        <div className="mb-4 flex items-center justify-between gap-3">
+          <div>
+            <h3 className="text-lg font-semibold">Recent activity timeline</h3>
+            <p className="text-xs text-muted-foreground">Campus events and AI notifications from the last 24 hours.</p>
+          </div>
+          <span className="rounded-full bg-white/5 px-3 py-1 text-xs uppercase tracking-widest text-muted-foreground">Live feed</span>
+        </div>
+        <div className="space-y-4">
+          {[
+            { time: "Just now", title: "Gate pass validated", desc: "Gate A verified your QR pass for evening outing.", tone: "success" },
+            { time: "1h ago", title: "Complaint updated", desc: "AC repair scheduled for 7:00 PM in B-302.", tone: "info" },
+            { time: "3h ago", title: "Mess alert", desc: "Dinner menu updated with extra protein options.", tone: "accent" },
+            { time: "5h ago", title: "Electricity report", desc: "Your room usage was 12% lower than yesterday.", tone: "success" },
+          ].map((event) => (
+            <div key={event.time} className="glass flex flex-col gap-3 rounded-3xl p-4 sm:flex-row sm:items-center sm:justify-between">
+              <div>
+                <div className="text-sm font-semibold">{event.title}</div>
+                <div className="mt-1 text-xs text-muted-foreground">{event.desc}</div>
+              </div>
+              <div className={`rounded-full px-3 py-1 text-xs ${event.tone === "success" ? "bg-success/15 text-success" : event.tone === "info" ? "bg-info/15 text-info" : "bg-accent/15 text-accent"}`}>
+                {event.time}
+              </div>
+            </div>
+          ))}
+        </div>
+      </GlassCard>    </>
   );
 }
 

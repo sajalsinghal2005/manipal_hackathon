@@ -14,7 +14,9 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AppWardenRouteImport } from './routes/app.warden'
 import { Route as AppVisitorsRouteImport } from './routes/app.visitors'
 import { Route as AppStudentRouteImport } from './routes/app.student'
+import { Route as AppSettingsRouteImport } from './routes/app.settings'
 import { Route as AppSecurityRouteImport } from './routes/app.security'
+import { Route as AppProfileRouteImport } from './routes/app.profile'
 import { Route as AppComplaintsRouteImport } from './routes/app.complaints'
 import { Route as AppAssistantRouteImport } from './routes/app.assistant'
 import { Route as AppAnalyticsRouteImport } from './routes/app.analytics'
@@ -45,9 +47,19 @@ const AppStudentRoute = AppStudentRouteImport.update({
   path: '/student',
   getParentRoute: () => AppRoute,
 } as any)
+const AppSettingsRoute = AppSettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => AppRoute,
+} as any)
 const AppSecurityRoute = AppSecurityRouteImport.update({
   id: '/security',
   path: '/security',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppProfileRoute = AppProfileRouteImport.update({
+  id: '/profile',
+  path: '/profile',
   getParentRoute: () => AppRoute,
 } as any)
 const AppComplaintsRoute = AppComplaintsRouteImport.update({
@@ -78,7 +90,9 @@ export interface FileRoutesByFullPath {
   '/app/analytics': typeof AppAnalyticsRoute
   '/app/assistant': typeof AppAssistantRoute
   '/app/complaints': typeof AppComplaintsRoute
+  '/app/profile': typeof AppProfileRoute
   '/app/security': typeof AppSecurityRoute
+  '/app/settings': typeof AppSettingsRoute
   '/app/student': typeof AppStudentRoute
   '/app/visitors': typeof AppVisitorsRoute
   '/app/warden': typeof AppWardenRoute
@@ -90,7 +104,9 @@ export interface FileRoutesByTo {
   '/app/analytics': typeof AppAnalyticsRoute
   '/app/assistant': typeof AppAssistantRoute
   '/app/complaints': typeof AppComplaintsRoute
+  '/app/profile': typeof AppProfileRoute
   '/app/security': typeof AppSecurityRoute
+  '/app/settings': typeof AppSettingsRoute
   '/app/student': typeof AppStudentRoute
   '/app/visitors': typeof AppVisitorsRoute
   '/app/warden': typeof AppWardenRoute
@@ -103,7 +119,9 @@ export interface FileRoutesById {
   '/app/analytics': typeof AppAnalyticsRoute
   '/app/assistant': typeof AppAssistantRoute
   '/app/complaints': typeof AppComplaintsRoute
+  '/app/profile': typeof AppProfileRoute
   '/app/security': typeof AppSecurityRoute
+  '/app/settings': typeof AppSettingsRoute
   '/app/student': typeof AppStudentRoute
   '/app/visitors': typeof AppVisitorsRoute
   '/app/warden': typeof AppWardenRoute
@@ -117,7 +135,9 @@ export interface FileRouteTypes {
     | '/app/analytics'
     | '/app/assistant'
     | '/app/complaints'
+    | '/app/profile'
     | '/app/security'
+    | '/app/settings'
     | '/app/student'
     | '/app/visitors'
     | '/app/warden'
@@ -129,7 +149,9 @@ export interface FileRouteTypes {
     | '/app/analytics'
     | '/app/assistant'
     | '/app/complaints'
+    | '/app/profile'
     | '/app/security'
+    | '/app/settings'
     | '/app/student'
     | '/app/visitors'
     | '/app/warden'
@@ -141,7 +163,9 @@ export interface FileRouteTypes {
     | '/app/analytics'
     | '/app/assistant'
     | '/app/complaints'
+    | '/app/profile'
     | '/app/security'
+    | '/app/settings'
     | '/app/student'
     | '/app/visitors'
     | '/app/warden'
@@ -189,11 +213,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppStudentRouteImport
       parentRoute: typeof AppRoute
     }
+    '/app/settings': {
+      id: '/app/settings'
+      path: '/settings'
+      fullPath: '/app/settings'
+      preLoaderRoute: typeof AppSettingsRouteImport
+      parentRoute: typeof AppRoute
+    }
     '/app/security': {
       id: '/app/security'
       path: '/security'
       fullPath: '/app/security'
       preLoaderRoute: typeof AppSecurityRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/profile': {
+      id: '/app/profile'
+      path: '/profile'
+      fullPath: '/app/profile'
+      preLoaderRoute: typeof AppProfileRouteImport
       parentRoute: typeof AppRoute
     }
     '/app/complaints': {
@@ -232,7 +270,9 @@ interface AppRouteChildren {
   AppAnalyticsRoute: typeof AppAnalyticsRoute
   AppAssistantRoute: typeof AppAssistantRoute
   AppComplaintsRoute: typeof AppComplaintsRoute
+  AppProfileRoute: typeof AppProfileRoute
   AppSecurityRoute: typeof AppSecurityRoute
+  AppSettingsRoute: typeof AppSettingsRoute
   AppStudentRoute: typeof AppStudentRoute
   AppVisitorsRoute: typeof AppVisitorsRoute
   AppWardenRoute: typeof AppWardenRoute
@@ -243,7 +283,9 @@ const AppRouteChildren: AppRouteChildren = {
   AppAnalyticsRoute: AppAnalyticsRoute,
   AppAssistantRoute: AppAssistantRoute,
   AppComplaintsRoute: AppComplaintsRoute,
+  AppProfileRoute: AppProfileRoute,
   AppSecurityRoute: AppSecurityRoute,
+  AppSettingsRoute: AppSettingsRoute,
   AppStudentRoute: AppStudentRoute,
   AppVisitorsRoute: AppVisitorsRoute,
   AppWardenRoute: AppWardenRoute,
@@ -258,3 +300,13 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}

@@ -2,7 +2,7 @@ import { Link, useRouterState } from "@tanstack/react-router";
 import { useState } from "react";
 import {
   LayoutDashboard, MessageSquareWarning, ShieldCheck, Users2, BarChart3,
-  Sparkles, Lock, Building2, Menu, X, GraduationCap, LogOut,
+  Sparkles, Lock, Building2, Menu, X, GraduationCap, LogOut, UserCircle2, Settings,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -15,6 +15,8 @@ const nav = [
   { to: "/app/analytics", label: "AI Analytics", icon: BarChart3, role: "All" },
   { to: "/app/assistant", label: "AI Assistant", icon: Sparkles, role: "All" },
   { to: "/app/security", label: "Security", icon: Lock, role: "Security" },
+  { to: "/app/profile", label: "Profile", icon: UserCircle2, role: "You" },
+  { to: "/app/settings", label: "Settings", icon: Settings, role: "App" },
 ];
 
 export function AppSidebar() {
@@ -83,9 +85,9 @@ export function AppSidebar() {
 
         <div className="border-t border-glass-border p-4">
           <div className="glass flex items-center gap-3 rounded-xl p-3">
-            <div className="grid h-9 w-9 place-items-center rounded-full bg-gradient-primary text-sm font-bold text-primary-foreground">AK</div>
+            <div className="grid h-9 w-9 place-items-center rounded-full bg-gradient-primary text-sm font-bold text-primary-foreground">SS</div>
             <div className="min-w-0 flex-1">
-              <div className="truncate text-sm font-medium">Aarav Kumar</div>
+              <div className="truncate text-sm font-medium">Sajal Singhal</div>
               <div className="truncate text-xs text-muted-foreground">Room B-302 · CS '26</div>
             </div>
             <button className="rounded-md p-1.5 text-muted-foreground hover:bg-white/5 hover:text-foreground">
