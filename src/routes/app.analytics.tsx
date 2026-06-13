@@ -80,22 +80,20 @@ function AnalyticsPage() {
                 {Array.from({ length: 24 }).map((_, h) => (
                   <div key={h} className="text-center text-[9px] text-muted-foreground">{h}</div>
                 ))}
-                {["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"].map((day, r) => (
-                  <>
-                    <div key={day} className="pr-2 text-right text-xs text-muted-foreground">{day}</div>
-                    {heatmap[r].map((cell) => (
-                      <div
-                        key={`${r}-${cell.h}`}
-                        className="m-px aspect-square rounded-sm transition hover:scale-125"
-                        style={{
-                          background: `oklch(${0.30 + cell.v * 0.45} ${0.06 + cell.v * 0.16} ${250 - cell.v * 220})`,
-                          opacity: 0.4 + cell.v * 0.6,
-                        }}
-                        title={`${day} ${cell.h}:00 · ${Math.round(cell.v * 100)}%`}
-                      />
-                    ))}
-                  </>
-                ))}
+                {["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"].flatMap((day, r) => [
+                  <div key={`label-${day}`} className="pr-2 text-right text-xs text-muted-foreground">{day}</div>,
+                  ...heatmap[r].map((cell) => (
+                    <div
+                      key={`${r}-${cell.h}`}
+                      className="m-px aspect-square rounded-sm transition hover:scale-125"
+                      style={{
+                        background: `oklch(${0.30 + cell.v * 0.45} ${0.06 + cell.v * 0.16} ${250 - cell.v * 220})`,
+                        opacity: 0.4 + cell.v * 0.6,
+                      }}
+                      title={`${day} ${cell.h}:00 · ${Math.round(cell.v * 100)}%`}
+                    />
+                  )),
+                ])}
               </div>
             </div>
           </div>
