@@ -1,0 +1,1 @@
+import{j as o}from"./index-DJwbKOy-.js";import{c as t}from"./utils-CRJc9Zd-.js";function i({className:r,children:s,...a}){return o.jsx("div",{className:t("glass rounded-2xl p-6 shadow-elegant transition-all hover:border-primary/40",r),...a,children:s})}export{i as G};
