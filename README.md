@@ -91,6 +91,7 @@ HostelX AI provides:
 * React
 * TypeScript
 * Tailwind CSS
+* Vite
 
 ### Charts
 
@@ -151,18 +152,10 @@ Prototype Submission for WebForge – A Smart Campus Webathon
 <img width="1911" height="915" alt="image" src="https://github.com/user-attachments/assets/1fef3fa0-c021-4111-9344-7163e116717a" />
 <img width="1918" height="914" alt="image" src="https://github.com/user-attachments/assets/c3157123-7f3c-42c0-9fee-f28b804e20cd" />
 
-
-
-
-
-
-
-
-
-
-
 ---
 
-## License
+## Future Scope
 
-MIT License
+- Mobile App
+- IoT Smart Meters
+- RFID Attendance
